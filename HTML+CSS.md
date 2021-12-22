@@ -505,7 +505,7 @@ type属性，可以指定序号的类型
 
 当要用border画三角形之类的，border-top这些设置的宽度其实是三角形的高
 
-![](https://github.com/zswdaye/-/blob/master/img/sanjiaox.png)
+![Image](https://github.com/zswdaye/-/blob/master/img/sanjiaox.png)
 
 ```css
 .sjx{
