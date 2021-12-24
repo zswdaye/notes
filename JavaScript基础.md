@@ -1248,6 +1248,8 @@ Teacher.prototype.sayId = function () {
 
 - 语法：array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
 
+- initialValue是total的初始化值
+
 - reduce( ) 方法：对数组中的所有元素调用指定的回调函数，该回调函数的返回值为累计结果。并且把返回值在下一次回调函数时作为参数提供。
 
   ```js
