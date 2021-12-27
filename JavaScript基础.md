@@ -1266,6 +1266,7 @@ Teacher.prototype.sayId = function () {
   
   // 计算数组中每个元素出现的次数
   let names = ['Alice', 'Bob', 'Tiff', 'Bruce', 'Alice'];
+  // 第一种
   let nameNum = names.reduce((pre,cur)=>{
     if(cur in pre){
       pre[cur]++
@@ -1273,6 +1274,11 @@ Teacher.prototype.sayId = function () {
       pre[cur] = 1 
     }
     return pre
+  },{})
+  // 第二种
+  let nameNum = names.reduce((pre,cur)=>{
+    pre[cur] = (pre[cur] + 1) || 1
+      return pre
   },{})
   console.log(nameNum); //{Alice: 2, Bob: 1, Tiff: 1, Bruce: 1}
   ```
