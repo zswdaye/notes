@@ -1,50 +1,58 @@
 ## 变量
 
-关键词：var---声明一个变量，开辟一块空间，用来存储数据
+关键词：var, let
 
-**不使用关键词进行声明，会自动变成全局变量，挂载到windows里面去**（相当于垃圾）
+声明一个变量，开辟一块空间，用来存储数据。
 
-### 声明变量的各种情况：
+`var` 其作用域为该语句所在的函数内，且存在变量提升现象；
 
-​		1.只声明不赋值
+`let` 其作用域为该语句所在的代码块内，不存在变量提升；
 
-​		2.先声明后赋值
+> 不使用关键词进行声明，会自动变成全局变量，挂载到windows里面去（相当于垃圾）
 
-​		3.声明变量并同时赋值
+声明变量的各种情况：
 
-​		4.同时定义多个变量，用逗号隔开
+​	1.只声明不赋值
 
-### 变量的命名规则：
+​	2.先声明后赋值
 
-​		1.严格区分大小写
+​	3.声明变量并同时赋值
 
-​		2.见名知意
+​	4.同时定义多个变量，用逗号隔开
 
-​		3.不能以数字开头，只能包含字母、数字   _    $
+变量的命名规则：
 
-​		4.不能使用中文
+​	1.严格区分大小写
 
-​		5.不能使用关键词和保留字
+​	2.见名知意
 
-​			关键词：js已经赋予特殊功能的单词
+​	3.不能以数字开头，只能包含字母、数字   _    $
 
+​	4.不能使用中文
+
+​	5.不能使用关键词和保留字
+
+关键词：js已经赋予特殊功能的单词
+
+```log
 break、case、catch、continue、debugger(第五版新增关键字)、default、delete、do、else、finally、for、function、if、in、instanceof、new、return、switch、this、throw、try、typeof、var、void、while、with
+```
 
-​			保留字：js预定未来可能要用的单词(ECMA-262第三版定义的保留字)
+保留字：js预定未来可能要用的单词(ECMA-262第三版定义的保留字)
 
-abstract、boolean、byte、char、class、const、debugger、double、enum、export、extends、final、float、goto、implements、import、int、interface、long、native、package、private、protected、public、short、static、super、synchronized、throws、transient、volatile
+```log
+abstract、boolean、byte、char、class、const、debugger、double、enum、export、extends、final、float、goto、implements、import、int、interface、long、native、package、private、protected、public、short、static、super、synchronized、throws、transient、volatile、top
+```
 
-​		   //top也属于保留字
-
-变量命名规范：使用驼峰命名 
+变量命名规范：使用驼峰命名
 
 ## 常量
 
 定义常量：const
 
-​				例：const x = 3.1415926;
+例：const x = 3.1415926;
 
-注意：**常量一旦定义，就不能再更改，重新赋值，只能用来使用**
+注意：**常量只能用来使用，一旦定义，就不能再更改、重新赋值**
 
 常量命名规范：全字母大写加下划线_拼接    //示例：MAX_NUMBER
 
@@ -54,57 +62,102 @@ ES5数据类型：6个
 
 基础数据类型：5个
 
-​		1.number---数值型
+​	1.number  数值型
 
-​		2.string---字符串
+​	2.string  字符串
 
-​		3.boolean---布尔值：true / flase---判断
+​	3.boolean  布尔值：true / flase---判断
 
-​		4.null---空---含义：空对象
+​	4.null  空---含义：空对象
 
-​		5.undefined---未定义
+​	5.undefined  未定义
 
 复杂数据类型：1个
 
-​				object---对象
+​	object---对象
 
-检测数据类型---typeof   变量名 / typeof(变量名)
+检测数据类型---typeof 变量名 / typeof(变量名)
 
-### number
+### Number
 
-特殊：NaN---not a number ,如: 0 / 0   ,   a / 0
+特殊：`NaN`含义是not a number ，用于表示一个本来要返回数值的操作数未返回数值的情况。如: 0 / 0 ，a / 0
 
-NaN不等于任何值，包括它本身。
+在ECMAScript中，任何数值除以非数值会返回`NaN`，任何涉及`NaN`的操作0（例如NaN/10）都会返回`NaN`。
 
-isNaN()方法可以用来判断一个值是否为NaN。它只对数值有效，如果传入其他值，会先转成数值。比如传入字符串，字符串会被先转成NaN，返回true，同样的，数组和对象也会返回true。对于空数组和只有一个数组成员的数组，会返回false。
+`NaN`不等于任何值，包括它本身。
+
+isNaN()方法可以用来判断一个值是否为NaN，它在接受到一个值后会尝试将这个值转换为数值。比如传入字符串，字符串会被先转成NaN，然后返回true。
+
+```js
+console.log(isNaN(10))  // false(10是一个数值)
+console.log(isNaN("10")) // false(可以被转换成数值10)
+console.log(isNaN(true))  // false(可以被转换成数值1)
+console.log(isNaN(null)) // false(可以被转换为0)
+console.log(isNaN(NaN))  //true
+console.log(isNaN(undefined))  // true(不能转换数值)
+console.log(isNaN("blue")) // true(不能转换成数值)
+console.log(isNaN({a: 1})) // true(不能转换成数值)
+```
+
+isNaN()也适用于对象。在基于对象调用isNaN()函数时，会首先调用对象的valueOf()方法，然后确定该方法返回的值是否可以转换为数值。如果不能，则基于这个返回值再调用toString()方法，再测试返回值。
+
+```js
+console.log(isNaN([]))  // false
+console.log(isNaN(['a']))  // true(a不可以被转换成数值)
+console.log(isNaN([10]))  // false(可以被转换成数值10)
+console.log(isNaN([1,2]))  // true(1和2虽然都是数值，但是它们valueOf()返回的是[1, 2]，不能转换为数值，基于这个返回值再调用toString()返回来的是'1,2'，也不能转换为数值) 
+```
+
+一般是通过isNaN来判断一个值是否为NaN，但是通过上面的例子可以看出，不是NaN的值也被误判为NaN了，所以ES6为了弥补这个bug引入了`Number.isNaN()`，不是NaN的值不会返回true了
+
+```js
+console.log(Number.isNaN(NaN))  //true
+console.log(Number.isNaN(undefined))  // false
+console.log(Number.isNaN("blue")) // false
+console.log(Number.isNaN({a: 1})) // false
+console.log(Number.isNaN([1, 2])) // false
+```
 
 数值进制：
 
-​		普通数字为十进制
+​	普通数字为十进制
 
-​		八进制：以0 / 0o / 0O开头的数字，字面量就是八进制，八进制只能包含0~7
+​	八进制：以0 / 0o / 0O开头的数字，字面量就是八进制，八进制只能包含0~7
 
-​		十六进制：以0x / 0X开头的数字，字面量就是十六进制，十六进制包含数字0-9youx和a-f / A-F
+​	十六进制：以0x / 0X开头的数字，字面量就是十六进制，十六进制包含数字0-9和a-f / A-F
 
 浮点数就是小数
 
-指数就是允许使用e来表示乘以10的几次幂，如console.log(5e5); 就是500000
-
-由于浮点数不是精确的值，所以涉及小数的比较和运算要特别小心
+浮点数值的最高精度是17位小数，但在进行算术计算时其精度远远不如整数，所以涉及小数的比较和运算要特别小心
 
 ```js
 console.log(0.1+0.2);  //0.3000000000000004
 ```
 
-**Infinity**表达式的计算结果太大或太小，超出能够表示的范围，因此返回Infinity。而非0数值除以0，也会返回Infinity，如：1/0
+指数就是允许使用e来表示乘以10的几次幂
 
-Infinity有正负之分，Infinity表示正的无穷，-Infinity表示负的无穷	
+```js
+console.log(5e5);  // 500000
+```
 
-Infinity大于一切数值(除了NaN)，-Infinity小于一切数值(除了NaN).
+ECMAScript能够表示的最小数值保存在`Number.MIN_VALUE`中，在绝大多数的浏览器中，这个值是5e-324；能够表示的最大数值保存在`Number.MAX_VALUE`中。在绝大多数的浏览器中，这个值为1.7976931348623157e+308。超过这个JavaScript数值范围的值会被自动转为特殊的`Infinity`值。
 
-isFinite()方法返回一个布尔值，表示某个值是否为正常的数值。除了Infinity、-Infinity、NaN和undefined这几个值会返回false，其他数值都会返回true。
+非0数值除以0，也会返回`Infinity`，如：1/0
 
-### undefined
+`Infinity`有正负之分，`Infinity`表示正的无穷，`-Infinity`表示负的无穷，`Infinity`大于一切数值(除了NaN)，`-Infinity`小于一切数值(除了NaN).
+
+访问`Number.NEGATIVE_INFINITY`和`Number.POSITIVE_INFINITY`也可以得到负和正Infinity的值，这两个属性中分别保存着`-Infinity`和`Infinity`。
+
+isFinite()方法返回一个布尔值，来判断这个值是否是有穷的，介于最小与最大值之间时会返回true。除了Infinity、-Infinity、NaN和undefined这几个值会返回false，其他数值都会返回true。
+
+```js
+var result = Number.MAX_VALUE+Number.MAX_VALUE
+console.log(isFinite(result))  // false
+```
+
+### Undefined
+
+未声明的变量和未初始化的变量都会自动的赋予为`undefined`值，使用`typeof`进行检测都会返回“undefined”
 
 出现场景：
 
@@ -114,49 +167,105 @@ isFinite()方法返回一个布尔值，表示某个值是否为正常的数值�
 
 ​	3.对象没有赋值的属性，该属性的值为undefined
 
-​	4.函数没有返回值时。默认返回undefined。
+​	4.函数没有返回值时，默认返回undefined
 
-### string
+```js
+let message;
+console.log(typeof message)  // "undefined"
+console.log(typeof age)  // "undefined"
+let a = {}
+console.log(typeof a.c) // undefined
+```
 
-字符串是由0或是多个字符组成的字符序列,即字符串;
+### String
 
-字符串可以用双引号(“”)或是单引号(‘’)或模板字符串(``)包裹起来。
+字符串是由0或是多个字符组成的字符序列，即字符串。
 
-如果一个数字，用引号引起来，那么就是字符串了。不加引号是错误的，注意引号必须是同种引号，混用错误。
+字符串可以用双引号 (“) 或是单引号 (‘) 或模板字符串(``)包裹起来。
 
-### boolean
+如果一个数字，用引号引起来，那么就是字符串了。
+
+> 注意引号必须是同种引号，混用会导致语法错误。
+
+1.字符字面量
+
+​	String数据类型包含一些特殊的字符字面量，也叫转义序列，用于表示非打印字符，或者具有其他用途的字符。
+
+| 字面量 |                             含义                             |
+| :----: | :----------------------------------------------------------: |
+|   \n   |                             换行                             |
+|   \t   |                             制表                             |
+|   \b   |                             退格                             |
+|   \r   |                             回车                             |
+|   \f   |                             换页                             |
+|  \\\   |                             斜杠                             |
+|  \\'   | 单引号（ ' ），在用单引号表示的字符串中使用。例如：' He said, \\'hey.\\' ' |
+|  \\"   | 双引号（ " ），在用双引号表示的字符串中使用。例如：" He said, \\"hey.\\" " |
+|  \xnn  | 以十六进制代码nn表示的一个字符（其中n为0~F）。例如，\x41表示"A" |
+| \unnnn | 以十六进制代码nnnn表示的一个Unicode字符（其中n为0~F）。例如，\u03a3表示希腊字母Σ |
+
+```js
+var text='This is the letter sigma: \u03a3.'
+// 这个例子中的变量text有28个字符，其中6个字符长的转义序列表示1个字符
+console.log(text.length) // 28
+```
+
+2.字符串的特点
+
+ECMAScript中的字符串是不可变的，也就是说，字符串一旦创建，它们的值就不能改变。要改变某个变量保存的字符串，首先要销毁原来的字符串，然后再用另一个包含新值的字符串填充该变量。
+
+### Boolean
 
 布尔（逻辑）只能有两个值：true 或 false。
 
-除了undefined、null、false、0、NaN、""或''或 ``（空字符串）被转为false，其他值都视为true。
+除了undefined、null、false、0、NaN、`""`或`''`或 ``（空字符串）被转为false，其他值都视为true。
 
-### null
+### Null
 
-null表示空，它是一个空对象指针，undefined则表示未定义。
+null值表示的是一个空对象指针，所以用`typeof`进行类型检测的时候会返回`object`，所以只要意在保存对象的变量还没有真正保存对象时，应将变量设为`null`值。
 
-typeof检测不出，检测出的结果是object
-
-undefined值派生自null值的，所以undefined==null的返回结果是true。
-
-### Object 
-
-#### Array 数组 
-
-数组（array）是按次序排列的一组值。每个值的位置都有编号 （从0开始），整个数组用方括号表示。
-
-清空数组的一个有效方法，就是将length属性设为0。
-
-除了在定义时赋值，数组也可以先定义后赋值。
+`undefined`值派生自`null`值，所以进行相等性测试时会返回`true`
 
 ```js
-var arr = [];
-arr[0] = 'a'; arr[1] = 'b'; arr[2] = 'c';
+console.log(null == undefined); // true
 ```
 
-数组的嵌套取值 
-	如果数组的元素还是数组，就形成了多维数组
+### Object
 
-#### object 对象数据(狭义的对象)
+Object的每个实例都具有下列属性和方法:
+
+1.constructor：保存着用于创建当前对象的函数。
+
+2.hasOwnProperty(propertyName)：用于检查给定的属性在当前对象实例中（而不是在实例的原型中）是否存在。其中，作为参数的属性名（propertyName）必须以字符串形式指定（例如：o.hasOwnProperty("name")）。
+
+3.isPrototypeOf(object)：用于检查传入的对象是否是当前对象的原型。
+
+4.propertyIsEnumerable(propertyName)：用于检查给定的属性是否能够使用for-in语句来枚举，返回一个布尔值。与hasOwnProperty()方法一样，作为参数的属性名必须以字符串形式指定。
+
+```js
+const object1 = {};
+const array1 = [];
+object1.property1 = 42;
+array1[0] = 42;
+console.log(object1.propertyIsEnumerable('property1'));  // true
+console.log(array1.propertyIsEnumerable(0));  // true
+console.log(array1.propertyIsEnumerable('length'));  // false
+```
+
+5.toLocaleString()：返回对象的字符串表示，该字符串与执行环境的地区对应。
+
+```js
+var d=new Date();
+console.log(d)	// Fri Dec 31 2021 10:43:51 GMT+0800 (中国标准时间)
+var n=d.toLocaleString();
+console.log(n)	// 2021/12/31 上午10:43:51
+```
+
+6.toString()：返回对象的字符串表示。
+
+7.valueOf()：返回对象的字符串、数值或布尔值表示。通常与toString()方法的返回值相同。
+
+#### Object 对象
 
 对象是一组键值对的集合 , 是一种无序的复合数据集合
 
@@ -211,6 +320,22 @@ console.log(window);
 console.log(document);
 ```
 
+#### Array 数组 
+
+数组（array）是按次序排列的一组值。每个值的位置都有编号 （从0开始），整个数组用方括号表示。
+
+清空数组的一个有效方法，就是将length属性设为0。
+
+除了在定义时赋值，数组也可以先定义后赋值。
+
+```js
+var arr = [];
+arr[0] = 'a'; arr[1] = 'b'; arr[2] = 'c';
+```
+
+数组的嵌套取值 
+	如果数组的元素还是数组，就形成了多维数组
+
 #### 函数对像
 
 函数是一段可以反复调用的代码块
@@ -247,42 +372,46 @@ isObjectEqual(a, b) {
 
 ## 数据类型转换
 
-### number类型转换
+### Number类型转换
 
-1.数值---返回对应数字
+有3个函数可以把非数值转换为数值：Number()、parseInt()和parseFloat()。第一个函数，即转型函数Number()可以用于任何数据类型，而另两个函数则专门用于把字符串转换成数值。这3个函数对于同样的输入会有返回不同的结果。
 
-  若传入其它进制数---返回对应十进制数
+**Number()函数的转换规则**
 
-2.布尔值--- true->1  /  false-> 0
+1.数值，返回对应数字
 
-3.null---返回0
+​	若传入其它进制数，返回对应十进制数
 
-4.undefined---返回NaN
+2.布尔值，true -> 1  /  false -> 0
+
+3.null，返回0
+
+4.undefined，返回NaN
 
 5.字符转number
 
 ①字符中值包括数字（包括前边有正负号的情况）如果前面有0，0被忽略
 
-```js
-Number("001223") // 1223
-Number("+12")    // 12
-Number("-015")   // -15
-```
+    Number("001223") // 1223
+    Number("+12")    // 12
+    Number("-015")   // -15
 
 ②如果字符串中包含有效的浮点数，将其转换成对应的浮点数值
 
-```js
-Number("11.22")  // 11.22
-Number("00.22")  // 0.22
-```
+    Number("11.22")  // 11.22
+    Number("00.22")  // 0.22
 
 ③如果字符串中包含有效的16进制--转换成相同大小的10进制数值
 
-```js
-Number("0xf")  // 15
-```
+    Number("0xf")  // 15
 
-④如果字符串是空则转化为 0
+④如果字符串是空(不包含任何字符)则转化为 0
+
+```js
+Number("") // 0
+Number(" ") // 0
+Number("  ") // 0
+```
 
 ⑤如果字符串包含上述格式之外的字符，将其转换成NaN
 
@@ -291,16 +420,19 @@ Number("11.无效")     // NaN
 Number("汉字 01.15")  // NaN
 ```
 
-6.**parseInt()**
+6.如果是对象，则调用对象的valueOf()方法，然后依照前面的规则转换返回的值。如果转换的结果是NaN，则调用对象的toString()方法，然后再次依照前面的规则转换返回的字符串值。
 
-①他会忽略字符串前边的空，直至找到第一个非空字符，如果第一个字符是数字字符,parseInt()会继续解析第二个字符，直到解析完后续的字符或遇到一个非数字字符
+**parseInt()函数的转换规则**
+
+1.它会忽略字符串前边的空，直至找到第一个非空字符，如果第一个字符是数字字符,parseInt()会继续解析第二个字符，直到解析完后续的字符或遇到一个非数字字符
 
 ```js
 parseInt("  123")         // 123
 parseInt("      汉字456")  // NaN
+parseInt("  123blue")  // 123
 ```
 
-②如果第一个字符不是数字字符或符号，则返回 NaN
+2.如果第一个字符不是数字字符或符号，则返回 NaN
 
 ```js
 parseInt("+456pt")  //456
@@ -308,7 +440,7 @@ parseInt("汉字13")  //NaN
 parseInt("-245")    // -245
 ```
 
-③如果解析的值是一个小数或者字符串开头是的小数，只会截取整数部分
+3.如果解析的值是一个小数或者字符串开头是的小数，只会截取整数部分
 
 ```js
 parseInt("000.1400561") // 0
@@ -316,129 +448,214 @@ parseInt(1.23)			// 1
 parseInt("0.999")		// 0
 ```
 
-7.**parseFloat()**
+4.如果第一个字符是数字字符，parseInt()也能够识别出各种整数格式（即前面讨论的十进制、八进制和十六进制数） 
 
-parseFloat() 和 parseInt() 唯一的区别就是他可以解析出小数
+```js
+parseInt("0xA") // 10(十六进制数)
+parseInt("070") // 56(八进制数)
+parseInt("70")		// 70(十进制数)
+```
+
+> 在使用parseInt()解析像八进制字面量的字符串时，ECMAScript 3和5存在分歧
+
+```js
+let num = parseInt("070")
+// ECMAScript 3认为是八进制，ECMAScript 5认为是十进制
+```
+
+为了消除上述困惑，可以为parseInt()提供第二个参数，代表的是转换时使用的基数(多少进制)
+
+```js
+let num = parseInt("0xAF", 16)  // 175
+// 事实上如果指定了16作为第二参数，字符串可以不带前面的“0x”
+```
+
+**parseFloat()函数的转换规则**
+
+parseFloat() 和 parseInt() 有两个区别
+
+第一个就是它可以解析出小数
 
 ```js
 parseFloat(111.222)  //111.222
 parseFloat("11.22.33") //11.22
 ```
 
-### string类型转换
-
-1.toString
-
-①数字转换成字符串不能直接数字.toString(),而是需要把一个数字存到一个变量，然后变量.toString()实现转换
+第二个就是它始终都会忽略前导的零
 
 ```js
-var str = 111;
-var a = str.toString();
-console.log(a);		// 111
+parseFloat("0xA")  // 0
+parseFloat("0908.5") // 908.5
+parseFloat("3.125e7") // 31250000
+```
+
+> 由于parseFloat()只解析十进制值，所以它没有第二个参数指定基数的用法
+
+### String类型转换
+
+1.toString()
+
+数值、布尔值、对象和字符串值（没错，每个字符串也都有一个toString()方法，该方法返回字符串的一个副本）都有toString()方法。但null和undefined值没有这个方法。
+
+①数字转换成字符串不能直接数字.toString(),而是需要把一个数字存到一个变量，然后`变量.toString()`实现转换。默认情况下，toString()方法以十进制格式返回数值的字符串表示，而通过传递基数，toString()可以输出以二进制、八进制、十六进制，乃至其他任意有效进制格式表示的字符串值。
+
+```js
+var str = 10;
+console.log(str.toString());		// '10'
+console.log(str.toString(2));		// '1010'
+console.log(str.toString(8));		// '12'
+console.log(str.toString(16));		// 'a'
 ```
 
 ②数组转换成字符串，只需要一个个拆分出来就好了
 
 ```js
 var aa = ["hellow","xiao","1"];
-console.log(aa.toString());  // hellow,xiao,1
+console.log(aa.toString());  // 'hellow,xiao,1'
 ```
 
 ③如果是嵌套数组，先解析小数组，再解析大数组
 
 ```js
 var b = [1,"2",["ww","22"]];
-console.log(b.toString());  //1,2,ww,22
+console.log(b.toString());  //'1,2,ww,22'
 ```
 
 ④函数转为字符串，则将函数完整的代码输出出来
 
 ```js
 function fn(){alert(1)}
-console.log(fn.toString()); //function fn(){alert(1)}
+console.log(fn.toString()); //'function fn(){alert(1)}'
 ```
 
 ⑤对象转为字符串直接一个表示符[object Object]
 
 ```js
 var obj = {x: 111, y: "哎"};
-console.log(obj.toString());  // [object Object]
+console.log(obj.toString());  // '[object Object]'
 ```
 
 ⑥布尔值转换字符串的结果就是相对应的字符串
 
 ```js
-console.log(true.toString(),false.toString());  //结果：true false
+console.log(true.toString(),false.toString());  //结果：'true' 'false'
 ```
 
-**null和undefined值不支持toString()方法，但可以使用String()方法**
+⑦null和undefined值不支持toString()方法，但可以使用String()方法
 
 2.String()
 
+String()函数转换规则
+
+1.如果值有toString()方法，则调用该方法（没有参数）并返回相应的结果
+
+2.如果值是null，则返回"null"
+
+3.如果值是undefined，则返回"undefined"
+
 ```js
-var zz = null,xx = undefined;
-console.log(String(zz),String(xx));   //null undefined
+var zz = null;
+var xx = undefined;
+console.log(String(zz));   // 'null'
+console.log(String(xx));	// 'undefined'
 ```
 
 ### Boolean类型转换
 
-| 数据类型  | 转换为true的值            | 转化为flase的值 |
-| :-------- | :------------------------ | :-------------: |
-| boolean   | ture                      |      false      |
-| string    | 任何非空字符串            | “”（空字符串）  |
-| number    | 任何非0数值（包括无穷大） |     0 和NaN     |
-| object    | 任何对象                  |      null       |
-| undefined | \                         |    undefined    |
+| 数据类型  |      转换为true的值       | 转化为flase的值 |
+| :-------: | :-----------------------: | :-------------: |
+|  boolean  |           ture            |      false      |
+|  string   |      任何非空字符串       | “”（空字符串）  |
+|  number   | 任何非0数值（包括无穷大） |     0 和NaN     |
+|  object   |         任何对象          |      null       |
+| undefined |             \             |    undefined    |
 
 ## 运算符
 
 ### 一元运算符
 
-1.+
+1.+，-
 
-​	+ 放在数值前，不会产生任何影响，放在非数值前，就用调用Number() -- 转换成数值
+放在数值前，不会产生任何影响，放在非数值前，就会调用Number()转换成数值。换句话说，布尔值false和true将被转换为0和1，字符串值会被按照一组特殊的规则进行解析，而对象是先调用它们的valueOf()和（或）toString()方法，再转换得到的值。
 
-2.-
+```js
+let a = '1', b = 'z', c = false, d = {valueOf:function(){return -1}}
+console.log(+a) // 1
+console.log(typeof +a) // number
+console.log(-a) // -1
+console.log(typeof -a) // number
+console.log(+b) // NaN
+console.log(+c) // 0
+console.log(+d) // -1
+```
 
-放在 数值 前，表示负数，放在非数值前，就会调用 Number() -- 转换成数值，或者转化成负数
-
-3.++
+2.++
 
 ​	a++：先赋值，再自生运算加1
 
 ​	++a: 先自生运算+1，再赋值
 
-4.--
+```js
+let num1 = 2, num2 = 22;
+let num3 = num1++ + num2  // 24
+let num4 = ++num1 + num2  // 26
+```
+
+3.--
 
 ​	a--：先赋值，再自生运算- 1
 
 ​	--a：先自生运算-1，再赋值
 
-5.a++ 和 ++a 的区别
+```js
+let num1 = 2, num2 = 22;
+let num3 = num1-- + num2  // 24
+let num4 = --num1 + num2  // 22
+```
 
-​	a++: 参与运算---不会先自己 +1，运算完了，再给自己 + 1
+4.a++ 和 ++a 的区别
+
+​	a++: 参与运算，不会先自己 +1，运算完了，再给自己 + 1
 
 ​	++a: 先给自己 +1，再参与运算
+
+所有这4个操作符对任何值都适用，也就是它们不仅适用于整数，还可以用于字符串、布尔值、浮点数值和对象。在应用于不同的值时，递增和递减操作符遵循下列规则。
+
+1.在应用于一个包含有效数字字符的字符串时，先将其转换为数字值，再执行加减1的操作。字符串变量变成数值变量。
+
+2.在应用于一个不包含有效数字字符的字符串时，将变量的值设置为NaN。字符串变量变成数值变量。
+
+3.在应用于布尔值false时，先将其转换为0再执行加减1的操作。布尔值变量变成数值变量。
+
+4.在应用于布尔值true时，先将其转换为1再执行加减1的操作。布尔值变量变成数值变量。
+
+5.在应用于浮点数值时，执行加减1的操作。
+
+6.在应用于对象时，先调用对象的valueOf()方法以取得一个可供操作的值。然后对该值应用前述规则。如果结果是NaN，则在调用toString()方法后再应用前述规则。对象变量变成数值变量。
 
 ### 二元运算符
 
 1.加法 -- 特殊 拼接
-    ①操作数两个都是数值-常规的加法计算,如果有一个操作数是NaN,则结果也是NaN
-    ② 如果两个操作数都是字符串,就是将两个操作数拼接起来
-    ③ 如果只有一个操作数是字符串,则将另一个操作数转换为字符串,然后再拼接起来
 
-​	④如果有一个操作数是对象,数值,布尔值，则调用他们的toString()方法，取得相对应的字符串，然后再进行前边的规则
+①操作数两个都是数值-常规的加法计算,如果有一个操作数是NaN,则结果也是NaN
 
-对于 undefined --- Number()，取得数字，再参与计算  undefined - NaN
+②如果两个操作数都是字符串,就是将两个操作数拼接起来
 
-对于 null  --- Number()，取得数字，再参与计算  null - 0
+③如果只有一个操作数是字符串,则将另一个操作数转换为字符串,然后再拼接起来
 
-2.减性操作符: 
+④如果有一个操作数是对象,数值,布尔值，则调用他们的toString()方法，取得相对应的字符串，然后再进行前边的规则
 
-            *   在进行作数也会进行数据类型转换，是把所有类型的数据先转换为数字类型再计算，不能直接转数字的就先转换成字符串再转成数字
+对于 undefined --- Number()，取得数字，再参与计算。  undefined -- NaN
 
-1. 如果有一个操作数是字符串，布尔值，null或者undefined，则先后台调用Number函数转换成数值， 然后根据规则执行减法计算，如果转换结果是NaN，则减法结果就是NaN
-2. 如果有一个操作数是对象,则调用对象的valueOf()取得表示该对象的数值,如果得到的值是NaN,结果就是NaN，如果对象没有valueOf()方法，则调用他的toString()方法，得到字符串转换为数值
+对于 null  --- Number()，取得数字，再参与计算。  null -- 0
+
+2.减操作符: 
+
+在进行作数也会进行数据类型转换，是把所有类型的数据先转换为数字类型再计算，不能直接转数字的就先转换成字符串再转成数字
+
+①如果有一个操作数是字符串，布尔值，null或者undefined，则先后台调用Number函数转换成数值， 然后根据规则执行减法计算，如果转换结果是NaN，则减法结果就是NaN
+
+②如果有一个操作数是对象,则调用对象的valueOf()取得表示该对象的数值,如果得到的值是NaN,结果就是NaN，如果对象没有valueOf()方法，则调用他的toString()方法，得到字符串转换为数值
 
 ### 关系运算符
 
