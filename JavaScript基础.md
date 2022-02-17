@@ -1232,6 +1232,58 @@ Teacher.prototype.sayId = function () {
 };
 ```
 
+## this指向
+
+- 普通函数，定时器，立即执行函数中this指向？window
+
+- 事件绑定方法，this指向绑定的事件对象
+
+- 对象方法调用，this指向所属的对象
+
+- 构造函数，或者构造函数的原型对象中，this指向实例对象
+
+```js
+// ---------- 普通函数，定时器，立即执行函数中,this指向window ----------
+function fn(){
+  console.log('普通函数的this',this);
+}
+fn() // this指向window
+// 箭头函数的this只会指向它的上一级
+const aa=()=>{
+  console.log('箭头函数',this);
+}
+aa() // 这里箭头函数的上一级是window，所以this指向window
+setTimeout(() => {
+  console.log('定时器的this',this); // this指向window
+}, 2000);
+(function(){
+  console.log('立即执行函数的this',this); // this指向window
+})()
+// --------------- 事件绑定方法，this指向绑定的事件对象 -------------------------
+let btn = document.querySelector(".btn")
+btn.onclick = function(){
+  console.log("-----绑定事件------");
+  console.log(this); // this指向按钮btn
+}
+// --------------- 对象中的函数,this指向的是该对象 -------------------------
+let o = {
+  sayHi:function(){
+    console.log('对象中的函数的this',this);
+  }
+}
+o.sayHi() // this指向的是o这个对象
+// --------------- 构造函数或者构造函数的原型对象中，this指向实例对象 -------------------------
+function Star(){
+  console.log("构造函数",this);
+};
+Star.prototype.sing = function(){
+  // 构造函数或者构造函数的原型上this指向实例对象，构造函数有new关键字
+  console.log("构造函数原型上",this);
+}
+let ldh = new Star() // this指向的是ldh这个实例对象
+Star.prototype.sing() // this指向的是ldh这个实例对象
+```
+
 ## 数组方法
 
 ### push
