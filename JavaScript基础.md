@@ -783,11 +783,11 @@ var b = {
     aaa: "aa",
     bbb: "bb"
 }
-for(var i in a){
+for(var key in a){
     console.log(i);	//下标
     console.log(a[i]);  //数组元素
  }
-for(var i in b){
+for(var key in b){
     console.log(i); // i 是aaa，bbb
 }
 ```
@@ -800,7 +800,7 @@ for…of循环可以使用的范围包括数组、Set 和 Map 结构、某些类
 
 ```js
 var arr = ['a', 'b', 'c', 'd'];
- for (let a of arr) {
+ for (let value of arr) {
      console.log(a); // a b c d
  }
 ```
