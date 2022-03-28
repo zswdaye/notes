@@ -1445,7 +1445,7 @@ flex : 父元素 控制 子元素 的布局
 
 主轴: 元素的排列方向 ( 默认 向右 ) : 4个方向
 
-flex-direction:
+**flex-direction:**
 
 - row -- 默认-向右
 
@@ -1457,7 +1457,7 @@ flex-direction:
 
 交叉轴: 换行方向 ( 2个值 + 1个不换行(默认值))
 
-flex-wrap:
+**flex-wrap:**
 
 - nowrap -- 不换行
 
@@ -1465,13 +1465,13 @@ flex-wrap:
 
 - wrap-reverse:(要么：向上，要么：向左)
 
-flex-flow(前两个的复合属性): flex-direction flex-wrap
+**flex-flow**(前两个的复合属性): flex-direction flex-wrap
 
 >总结: 只有我们确定两个轴，后边的布局才有意义
 
 元素在主轴上的对齐方式: 假设主轴为从左到右。
 
-justify-content: 
+**justify-content:**
 
 - flex-start: (默认值)左对齐
 
@@ -1485,7 +1485,7 @@ justify-content:
 
 元素在交叉轴对齐方式: 假设交叉轴从上到下
 
-align-items : 
+**align-items:**
 
 - flex-start: 交叉轴的起点对齐。
 
@@ -1497,7 +1497,7 @@ align-items :
 
 - stretch: (默认值)如果项目未设置高度或设为auto，将占满整个容器的高度。 
 
-align-content: 定义了多根轴线的对齐方式。(每一行看成一个整体)
+**align-content:** 定义了多根轴线的对齐方式。(每一行看成一个整体)
 
 - flex-start: 与交叉轴的起点对齐。
 
@@ -1519,13 +1519,13 @@ align-content: 定义了多根轴线的对齐方式。(每一行看成一个整�
 
 子元素：flex项目 
 
-order: 定义项目的排列顺序。数值越小，排列越靠前，默认为0。
+**order:** 定义项目的排列顺序。数值越小，排列越靠前，默认为0。
 
-flex-grow: 定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。
+**flex-grow:** 定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。
 
 >给每个项目都设置为1的话，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。
 
-flex-shrink: 定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。
+**flex-shrink:** 定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。
 
 如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。
 
@@ -1533,19 +1533,19 @@ flex-shrink: 定义了项目的缩小比例，默认为1，即如果空间不足
 
 >压缩比例: 元素不换行，被挤压，谁设置的数值大谁被挤压的厉害
 
-flex-basis : 定义了在分配多余空间之前，项目占据的主轴空间。(主轴上项目的默认长度)
+**flex-basis:** 定义了在分配多余空间之前，项目占据的主轴空间。(主轴上项目的默认长度)
 
 - auto(默认值): 有内容决定
 
 >设置跟width或height属性一样的值（比如350px），则项目将占据固定空间。
 
-flex : 以上三个属性的复合写法 <flex-grow flex-shrink flex-basis>
+**flex:** 以上三个属性的复合写法 <flex-grow flex-shrink flex-basis>
 
 默认值为0 1 auto。该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。
 
 只需要了解的知识(不常用):
 
-align-self: 允许单个项目和其他的项目有不一样的对齐方式，可以覆盖 aligin-items 属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
+**align-self:** 允许单个项目和其他的项目有不一样的对齐方式，可以覆盖 aligin-items 属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
 
 - flex-start:
 
