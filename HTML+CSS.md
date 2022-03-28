@@ -1423,13 +1423,13 @@ body{
 </body>
 ```
 
-## 弹性盒模型
+## 弹性盒模型(flex布局)
 
 flex : 父元素 控制 子元素 的布局
 
-采用flex布局的元素-flex容器
+采用flex布局的元素 -- flex容器
 
-它所有的子元素自动成为这个容器的成员--flex项目
+它所有的子元素自动成为这个容器的成员 -- flex项目
 
 使用场景: inline-block ,float 结构布局中的错乱问题,不存在他们的问题,使用于移动端
 
@@ -1439,101 +1439,95 @@ flex : 父元素 控制 子元素 的布局
 
 ### flex容器
 
-父元素  flex容器  display: flex;
+父元素：flex容器  display: flex;
 
-**设置了flex 布局以后,子元素的float ,clear 和 vertical-align 属性将失效**
+>**设置了flex 布局以后,子元素的float ,clear 和 vertical-align 属性将失效**
 
 主轴: 元素的排列方向 ( 默认 向右 ) : 4个方向
 
-​       flex-direction:
+flex-direction:
 
-​        row --默认-向右
+- row -- 默认-向右
 
-​        row-reverse --向左
+- row-reverse -- 向左
 
-​        column ---向下
+- column -- 向下
 
-​        column-reverse
+- column-reverse -- 向上
 
 交叉轴: 换行方向 ( 2个值 + 1个不换行(默认值))
 
-​       flex-wrap:
+flex-wrap:
 
-​        nowrap --- 不换行
+- nowrap -- 不换行
 
-​        wrap: ( 要么: 向下---主轴,要么 向右--交叉轴)
+- wrap: -- 换行(要么：向下 -- 主轴，要么：向右 -- 交叉轴)
 
-​        wrap-reverse:( 要么 向上 ,要么 向左 )
+- wrap-reverse:(要么：向上，要么：向左)
 
- flex-flow : (前两个的复合属性) : flex-direction flex-wrap
+flex-flow(前两个的复合属性): flex-direction flex-wrap
 
-总结: 方向 : 只有我们确定两个轴,后边的布局才有意义
+>总结: 只有我们确定两个轴，后边的布局才有意义
 
-元素在主轴上的对齐方式: ~~~
+元素在主轴上的对齐方式: 
 
-​      justify-content: 
+justify-content: 
 
-​        flex-start:
+- flex-start:
 
-​        flex-end:
+- flex-end:
 
-​        center:
+- center:
 
-​        space-around : 每个项目两侧间隔相等
+- space-around : 每个项目两侧间隔相等
 
-​        space-between: 两端对齐,每个项目之间的间隔相等
+- space-between: 两端对齐,每个项目之间的间隔相等
 
-交叉轴对齐方式:
+元素在交叉轴对齐方式:
 
-​      align-items : 每行元素内部的排列 
+align-items : 每行元素内部的排列 
 
-​        flex-start:
+- flex-start:
 
-​        flex-end:
+- flex-end:
 
-​        center:
+- center:
 
-​        baseline:
+- baseline:
 
 align-content: 换行的这几行元素的对齐方式: { 每一行看成一个整体}
 
-​          **注意: 只有一行不起作用**
+- flex-start:
 
-​        flex-start:
+- flex-end:
 
-​        flex-end:
+- center:
 
-​        center:
+- space-around : 每个行两侧间隔相等
 
-​        space-around : 每个行两侧间隔相等
+- space-between: 两端对齐,每个行之间的间隔相等
 
-​        space-between: 两端对齐,每个行之间的间隔相等
+>**注意: 只有一行不起作用**
 
 ### flex项目
 
 目的: 子元素自己的微调
 
-项目的属性 : 6
+项目的属性: 6
 
-子元素  flex项目 
+子元素：flex项目 
 
 order: 排序
 
-​      默认值: 0 
+- 默认值: 0 
 
-​      1 2 3 .......
+1 2 3 .......
 
-​	  order值越小,排在最前边
+>order值越小，排在最前边
 
-flex-grow: 分配容器的多余空间 ---伸
+flex-grow: 分配容器的多余空间 -- 伸缩
 
-​      默认值: 0 
-
-​       1 --- 每个项目设置 ---平均分配
-
-​        单个给每个项目设置----放大
-
-​       2,3,4.....
+>默认值为0。给每个项目都设置为1的话，就是平均分配。但是单独给某个项目设置大于0的数字，那就放大这一个项目。
 
 flex-shrink:
 
