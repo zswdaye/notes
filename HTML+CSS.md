@@ -1469,43 +1469,45 @@ flex-flow(前两个的复合属性): flex-direction flex-wrap
 
 >总结: 只有我们确定两个轴，后边的布局才有意义
 
-元素在主轴上的对齐方式: 
+元素在主轴上的对齐方式: 假设主轴为从左到右。
 
 justify-content: 
 
-- flex-start:
+- flex-start: (默认值)左对齐
 
-- flex-end:
+- flex-end: 右对齐
 
-- center:
+- center:  居中
 
 - space-around : 每个项目两侧间隔相等
 
 - space-between: 两端对齐,每个项目之间的间隔相等
 
-元素在交叉轴对齐方式:
+元素在交叉轴对齐方式: 假设交叉轴从上到下
 
-align-items : 每行元素内部的排列 
+align-items : 
 
-- flex-start:
+- flex-start: 交叉轴的起点对齐。
 
-- flex-end:
+- flex-end: 交叉轴的终点对齐。
 
-- center:
+- center: 交叉轴的中点对齐。
 
-- baseline:
+- baseline: 项目的第一行文字的基线对齐。
 
-align-content: 换行的这几行元素的对齐方式: { 每一行看成一个整体}
+- stretch: (默认值)如果项目未设置高度或设为auto，将占满整个容器的高度。 
 
-- flex-start:
+align-content: 定义了多根轴线的对齐方式。(每一行看成一个整体)
 
-- flex-end:
+- flex-start: 与交叉轴的起点对齐。
 
-- center:
+- flex-end: 与交叉轴的终点对齐。
 
-- space-around : 每个行两侧间隔相等
+- center: 与交叉轴的中点对齐。
 
-- space-between: 两端对齐,每个行之间的间隔相等
+- space-around : 每根轴线两侧的间隔都相等。(每个行两侧间隔相等)
+
+- space-between: 与交叉轴两端对齐，轴线之间的间隔平均分布。(两端对齐，每个行之间的间隔相等)
 
 >**注意: 只有一行不起作用**
 
@@ -1517,53 +1519,43 @@ align-content: 换行的这几行元素的对齐方式: { 每一行看成一个�
 
 子元素：flex项目 
 
-order: 排序
+order: 定义项目的排列顺序。数值越小，排列越靠前，默认为0。
 
-- 默认值: 0 
+flex-grow: 定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。
 
-1 2 3 .......
+>给每个项目都设置为1的话，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。
 
->order值越小，排在最前边
+flex-shrink: 定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。
 
-flex-grow: 分配容器的多余空间 -- 伸缩
+如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。
 
->默认值为0。给每个项目都设置为1的话，就是平均分配。但是单独给某个项目设置大于0的数字，那就放大这一个项目。
+如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。
 
-flex-shrink:
+>压缩比例: 元素不换行，被挤压，谁设置的数值大谁被挤压的厉害
 
-​      1 --默认 收缩自己
+flex-basis : 定义了在分配多余空间之前，项目占据的主轴空间。(主轴上项目的默认长度)
 
-​      0 不收缩
+- auto(默认值): 有内容决定
 
-​      234.... 单个设置收缩
+>设置跟width或height属性一样的值（比如350px），则项目将占据固定空间。
 
-​    压缩比例: 元素不换行 被挤压
+flex : 以上三个属性的复合写法 <flex-grow flex-shrink flex-basis>
 
-​        谁大谁被挤压的厉害
-
-flex-basis : 主轴上项目的默认长度
-
-​	  auto : 有内容决定
-
-​      200px ...
-
-flex : 以上三个属性的复合写法:
-
-​      flex-grow flex-shrink flex-basis
-
-​      flex: 1; 
+默认值为0 1 auto。该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。
 
 只需要了解的知识(不常用):
 
-​      align-self: 允许单个项目和其他的项目有不一样的对齐方式,可以覆盖 aligin-items 属性
+align-self: 允许单个项目和其他的项目有不一样的对齐方式，可以覆盖 aligin-items 属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
 
-​        flex-start:
+- flex-start:
 
-​        flex-end:
+- flex-end:
 
-​        center:
+- center:
 
-​        baseline:
+- baseline:
+	
+- stretch:	
 
 ## 媒体查询
 
