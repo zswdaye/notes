@@ -214,5 +214,24 @@ git push -f origin dev
 
 > 对于master分支进行推送可能会报错，是因为远程主分支受到保护的分支，你需要获取Masters权限
 
+1.git reset --soft 版本号 
 
+```log
+git reset --soft HEAD^  //回到上一个版本
+不删除工作区改动的代码，撤销commit，不撤销git add .
+```
+
+2.git reset --mixed 版本号 
+
+```log
+git reset --mixed HEAD^  //回到上一个版本
+不删除工作区改动的代码，撤销commit，撤销git add .
+```
+
+3.git reset --hard 版本号 
+
+```log
+git reset --hard HEAD^  //回到上一个版本
+删除工作区的代码，撤销commit，撤销git add . 回到上一次commit的状态
+```
 
